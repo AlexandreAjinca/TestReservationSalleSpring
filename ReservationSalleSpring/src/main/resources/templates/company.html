@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>TestReservationSalle</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<h1>Entreprise</h1>
+<p>Liste des <a href="/planning">réservations</a></p>
+<div id="lists">
+	<div id=listReunions>
+		<h2>Liste des réunions</h2>
+		<table>
+		    <thead>
+		        <tr>
+		            <th>ID</th>
+		            <th>Créneau</th>
+		            <th>NB Personnes</th>
+		            <th>Type</th>
+		        </tr>
+		    </thead>
+		    <tbody>
+			<tr th:if="${entreprise.reunions.empty}">
+		        <td colspan="4"> Il n'y a pas de réunion' </td>
+		    </tr>
+		    <tr th:each="reunion : ${entreprise.reunions}">
+		        <td><span th:text="${reunion.idReunion}">  </span></td>
+		        <td><span th:text="|${reunion.creneau}h - ${reunion.creneau+1}h|">  </span></td>
+		        <td><span th:text="${reunion.nbPersonnes}">  </span></td>
+		        <td><span th:text="${reunion.type}">  </span></td>
+		    </tr>
+		    </tbody>
+		</table >
+	</div>
+	<div id=listSalles>
+		<h2>Liste des salles</h2>
+		<table>
+		    <thead>
+		        <tr>
+		            <th> Nom </th>
+		            <th> Capacité </th>
+		            <th>Equipement</th>
+		        </tr>
+		    </thead>
+		    <tbody>
+			<tr th:if="${entreprise.locaux.empty}">
+		        <td colspan="3"> Il n'y a pas de salles' </td>
+		    </tr>
+		    <tr th:each="salle : ${entreprise.locaux}">
+		        <td><span th:text="${salle.nom}"> Nom </span></td>
+		        <td><span th:text="${salle.capacite}"> Capacité </span></td>
+		        <td><span th:text="${salle.equipements}"> equipements </span></td>
+		    </tr>
+		    </tbody>
+		</table>
+	</div>
+</div>
+
+	
+	
+</body>
+</html>

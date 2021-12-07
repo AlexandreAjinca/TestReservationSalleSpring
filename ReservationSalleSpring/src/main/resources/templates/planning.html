@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>TestReservationSalle</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+	<p><a href="/company">Entreprise</a></p>
+	<div id="listReservations">
+		<h2>Liste des réservations</h2>
+		<table>
+		    <thead>
+		        <tr>
+		        	<th> Heure </th>
+		            <th> Réunion </th>
+		            <th> Salle </th>
+		            <th> Équipement réservé </th>
+		        </tr>
+		    </thead>
+		    <tbody>
+			<tr th:if="${reservations.empty}">
+		        <td colspan="3"> Il n'y a pas de réservation' </td>
+		    </tr>
+		    <tr th:each="res : ${#lists.sort(reservations)}">
+		    	<td><span th:text="|${res.reunion.creneau}h - ${res.reunion.creneau+1}h|"> Heure </span></td>
+		        <td><span th:text="${res.reunion.idReunion}"> Reunion </span></td>
+		        <td th:if="${res.salle != null}">
+		        	<span th:text="${res.salle.nom}"> Salle </span>
+	        	</td >
+	        	<td th:if="${res.salle == null}" colspan="2">
+		        	<span>Pas de salle disponible</span>
+	        	</td >
+	        	<td th:if="${res.salle != null}">
+		        	<span th:text="${res.equipementReserve}"></span>
+	        	</td >
+		    </tr>
+		    </tbody>
+		</table>
+	</div>
+</body>
+</html>
